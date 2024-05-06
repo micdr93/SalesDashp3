@@ -2,16 +2,21 @@ import gspread
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Style
 
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
+
+# Load credentials from creds.json file
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+
+# Authenticate using the credentials
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('Sales_DashboardP3')
+
+# Open the specified Google Sheets document
+SHEET = GSPREAD_CLIENT.open('sales_dashboard')
 
 class Person:
     def __init__(self, name, sales_target, revenue_to_date):
@@ -34,7 +39,10 @@ class SalesLeaderboard:
         for person in self.persons:
             pacing = person.calculate_pacing()
             pacing_str = f"{pacing:.2%}"
-            pacing_str = (Fore.GREEN if pacing >= 1 else Fore.RED) + pacing_str + Style.RESET_ALL
+            if pacing >= 1:
+                pacing_str = Fore.GREEN + pacing_str + Style.RESET_ALL
+            else:
+                pacing_str = Fore.RED + pacing_str + Style.RESET_ALL
             print(f"{person} {pacing_str:<20}")
 
     def search_person(self, name):
@@ -46,63 +54,31 @@ class SalesLeaderboard:
     def rank_by_pacing(self):
         self.persons.sort(key=lambda x: x.calculate_pacing(), reverse=True)
 
-def main_menu():
+def fetch_data_from_sheet(sheet):
+    data = sheet.get_all_values()[1:]  # Exclude header row
     persons = []
+    for row in data:
+        name, sales_target, revenue_to_date = row
+        sales_target = float(sales_target)
+        revenue_to_date = float(revenue_to_date)
+        person = Person(name, sales_target, revenue_to_date)
+        persons.append(person)
+    return persons
 
-    while True:
-        print("\n1. Add Person")
-        print("2. Edit Person")
-        print("3. List Persons")
-        print("4. View Sales Leaderboard")
-        print("5. Exit")
+def main():
+    # Fetch data from the Google Sheets document
+    persons = fetch_data_from_sheet(SHEET)
 
-        choice = input("Enter your choice: ")
-
-        if choice == "1":
-            add_person(persons)
-        elif choice == "2":
-            edit_person(persons)
-        elif choice == "3":
-            list_persons(persons)
-        elif choice == "4":
-            view_sales_leaderboard(persons)
-        elif choice == "5":
-            print("Exiting program.")
-            break
-        else:
-            print("Invalid choice. Please enter a number between 1-5.")
-
-def add_person(persons):
-    name = input("Enter person's name: ")
-    sales_target = float(input("Enter sales target: "))
-    revenue_to_date = float(input("Enter revenue to date: "))
-    person = Person(name, sales_target, revenue_to_date)
-    persons.append(person)
-    print("Person added successfully.")
-
-def edit_person(persons):
-    name = input("Enter the name of the person to edit: ")
-    for person in persons:
-        if person.name.lower() == name.lower():
-            new_sales_target = float(input(f"Enter new sales target for {name}: "))
-            new_revenue_to_date = float(input(f"Enter new revenue to date for {name}: "))
-            person.sales_target = new_sales_target
-            person.revenue_to_date = new_revenue_to_date
-            print("Person updated successfully.")
-            return
-    print("Person not found.")
-
-def list_persons(persons):
-    for person in persons:
-        print(person)
-
-        
-
-def view_sales_leaderboard(persons):
+    # Create the leaderboard
     leaderboard = SalesLeaderboard(persons)
+
+    # Rank persons by pacing
     leaderboard.rank_by_pacing()
+
+    # Print the leaderboard
     leaderboard.print_leaderboard()
 
+    # Example usage of the search function
     search_name = input("\nEnter the name of the person you want to search for: ")
     person = leaderboard.search_person(search_name)
     if person:
@@ -114,4 +90,4 @@ def view_sales_leaderboard(persons):
         print("\nPerson not found.")
 
 if __name__ == "__main__":
-    main_menu()
+    main()
