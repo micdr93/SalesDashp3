@@ -133,7 +133,7 @@ def display_leaderboard():
 
 def add_employee():
     """Add a new employee to the sales data."""
-    name = get_name
+    name = get_name()
     sales_target = get_float_input("Enter sales target: ")
     revenue_to_date = get_float_input("Enter revenue to date: ")
     new_person = Person(name, sales_target, revenue_to_date)
