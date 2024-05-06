@@ -111,7 +111,7 @@ def fetch_data_from_sheet(sheet):
     Returns:
         list: List of Person objects representing salespersons.
     """
-    worksheet = sheet.sheet
+    worksheet = sheet.sheet1
     data = worksheet.get_all_values()[1:]
     persons = []
     for row in data:
