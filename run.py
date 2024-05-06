@@ -2,13 +2,12 @@ import gspread
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Style
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
-
-# Authorize the Google Sheets API
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -35,10 +34,7 @@ class SalesLeaderboard:
         for person in self.persons:
             pacing = person.calculate_pacing()
             pacing_str = f"{pacing:.2%}"
-            if pacing >= 1:
-                pacing_str = Fore.GREEN + pacing_str + Style.RESET_ALL
-            else:
-                pacing_str = Fore.RED + pacing_str + Style.RESET_ALL
+            pacing_str = (Fore.GREEN if pacing >= 1 else Fore.RED) + pacing_str + Style.RESET_ALL
             print(f"{person} {pacing_str:<20}")
 
     def search_person(self, name):
@@ -50,34 +46,33 @@ class SalesLeaderboard:
     def rank_by_pacing(self):
         self.persons.sort(key=lambda x: x.calculate_pacing(), reverse=True)
 
-# Define the sales data with Person class
-sales_data = [
-    Person("Liam O'Connor", 100000, 78500),
-    Person("Aoife Murphy", 75000, 63200),
-    Person("Sean Kelly", 120000, 95800),
-    Person("Ciara Ryan", 90000, 71300),
-    Person("Conor Byrne", 110000, 88600),
-    Person("Saoirse Doyle", 80000, 67500),
-    Person("Cian O'Sullivan", 95000, 79400),
-    Person("Niamh Walsh", 85000, 85600),
-    Person("Eoin McCarthy", 70000, 58200),
-    Person("Aoibhinn Kennedy", 105000, 84700),
-    Person("Finnegan Hughes", 115000, 91600),
-    Person("Sinead O'Donnell", 65000, 53800),
-    Person("Padraig Fitzgerald", 125000, 99200),
-    Person("Aisling Brennan", 82000, 68900),
-    Person("Oisin Flynn", 88000, 74600),
-    Person("Roisin Gallagher", 97000, 81300),
-    Person("Declan O'Rourke", 72000, 59800),
-    Person("Eimear Clarke", 78000, 65400),
-    Person("Colm Ryan", 93000, 77900),
-    Person("Grainne O'Neill", 87000, 73100)
-]
+def main_menu():
+    persons = []
 
-# Assuming we'll store persons in a list
-persons = []
+    while True:
+        print("\n1. Add Person")
+        print("2. Edit Person")
+        print("3. List Persons")
+        print("4. View Sales Leaderboard")
+        print("5. Exit")
 
-def add_person():
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_person(persons)
+        elif choice == "2":
+            edit_person(persons)
+        elif choice == "3":
+            list_persons(persons)
+        elif choice == "4":
+            view_sales_leaderboard(persons)
+        elif choice == "5":
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1-5.")
+
+def add_person(persons):
     name = input("Enter person's name: ")
     sales_target = float(input("Enter sales target: "))
     revenue_to_date = float(input("Enter revenue to date: "))
@@ -85,7 +80,7 @@ def add_person():
     persons.append(person)
     print("Person added successfully.")
 
-def edit_person():
+def edit_person(persons):
     name = input("Enter the name of the person to edit: ")
     for person in persons:
         if person.name.lower() == name.lower():
@@ -97,46 +92,24 @@ def edit_person():
             return
     print("Person not found.")
 
-def main_menu():
-    while True:
-        print("\n1. Add Person")
-        print("2. Edit Person")
-        print("3. List Persons")
-        print("4. View Sales Leaderboard")
-        print("5. Exit")
-        choice = input("Enter your choice: ")
-        if choice == "1":
-            add_person()
-        elif choice == "2":
-            edit_person()
-        elif choice == "3":
-            for person in persons:
-                print(person)
-        elif choice == "4":
-            # Create the leaderboard
-            leaderboard = SalesLeaderboard(persons + sales_data)  # Add sales_data to the existing persons
+def list_persons(persons):
+    for person in persons:
+        print(person)
 
-            # Rank persons by pacing
-            leaderboard.rank_by_pacing()
+def view_sales_leaderboard(persons):
+    leaderboard = SalesLeaderboard(persons)
+    leaderboard.rank_by_pacing()
+    leaderboard.print_leaderboard()
 
-            # Print the leaderboard
-            leaderboard.print_leaderboard()
-
-            # Example usage of the search function
-            search_name = input("\nEnter the name of the person you want to search for: ")
-            person = leaderboard.search_person(search_name)
-            if person:
-                print("\nPerson found:")
-                print(f"Name: {person.name}")
-                print(f"Sales Target: {person.sales_target}")
-                print(f"Revenue to Date: {person.revenue_to_date}")
-            else:
-                print("\nPerson not found.")
-        elif choice == "5":
-            print("Exiting program.")
-            break
-        else:
-            print("Invalid choice. Please enter a number between 1-5.")
+    search_name = input("\nEnter the name of the person you want to search for: ")
+    person = leaderboard.search_person(search_name)
+    if person:
+        print("\nPerson found:")
+        print(f"Name: {person.name}")
+        print(f"Sales Target: {person.sales_target}")
+        print(f"Revenue to Date: {person.revenue_to_date}")
+    else:
+        print("\nPerson not found.")
 
 if __name__ == "__main__":
     main_menu()
