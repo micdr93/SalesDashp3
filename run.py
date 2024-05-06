@@ -92,3 +92,61 @@ if employee:
     print(f"Revenue to Date: {employee.revenue_to_date}")
 else:
     print("\nEmployee not found.")
+    
+class Person:
+    def __init__(self, first_name, last_name, attribute1, attribute2):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.attribute1 = attribute1
+        self.attribute2 = attribute2
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}, Attribute 1: {self.attribute1}, Attribute 2: {self.attribute2}"
+
+# Assuming we'll store persons in a list
+persons = []
+
+def add_person():
+    first_name = input("Enter first name: ")
+    last_name = input("Enter last name: ")
+    attribute1 = input("Enter Attribute 1: ")
+    attribute2 = input("Enter Attribute 2: ")
+    person = Person(first_name, last_name, attribute1, attribute2)
+    persons.append(person)
+    print("Person added successfully.")
+
+def edit_person():
+    first_name = input("Enter the first name of the person to edit: ")
+    last_name = input("Enter the last name of the person to edit: ")
+    for person in persons:
+        if person.first_name == first_name and person.last_name == last_name:
+            new_attribute1 = input(f"Enter new Attribute 1 for {first_name} {last_name}: ")
+            new_attribute2 = input(f"Enter new Attribute 2 for {first_name} {last_name}: ")
+            person.attribute1 = new_attribute1
+            person.attribute2 = new_attribute2
+            print("Person updated successfully.")
+            return
+    print("Person not found.")
+
+def main_menu():
+    while True:
+        print("\n1. Add Person")
+        print("2. Edit Person")
+        print("3. List Persons")
+        print("4. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            add_person()
+        elif choice == "2":
+            edit_person()
+        elif choice == "3":
+            for person in persons:
+                print(person)
+        elif choice == "4":
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1-4.")
+
+if __name__ == "__main__":
+    main_menu()
