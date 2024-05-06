@@ -96,6 +96,8 @@ def list_persons(persons):
     for person in persons:
         print(person)
 
+        
+
 def view_sales_leaderboard(persons):
     leaderboard = SalesLeaderboard(persons)
     leaderboard.rank_by_pacing()
