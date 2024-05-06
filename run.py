@@ -8,15 +8,13 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-# Load credentials from creds.json file
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 
-# Authenticate using the credentials
+
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
-# Open the specified Google Sheets document
-SHEET = GSPREAD_CLIENT.open('sales_dashboard')
+SHEET = GSPREAD_CLIENT.open('sales_leaderboardp3')
 
 class Person:
     def __init__(self, name, sales_target, revenue_to_date):
@@ -66,19 +64,18 @@ def fetch_data_from_sheet(sheet):
     return persons
 
 def main():
-    # Fetch data from the Google Sheets document
-    persons = fetch_data_from_sheet(SHEET)
+   
+    persons_from_sheet = fetch_data_from_sheet(SHEET)
 
-    # Create the leaderboard
-    leaderboard = SalesLeaderboard(persons)
+    leaderboard = SalesLeaderboard()
 
-    # Rank persons by pacing
+    
     leaderboard.rank_by_pacing()
 
-    # Print the leaderboard
+
     leaderboard.print_leaderboard()
 
-    # Example usage of the search function
+
     search_name = input("\nEnter the name of the person you want to search for: ")
     person = leaderboard.search_person(search_name)
     if person:
