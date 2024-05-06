@@ -35,7 +35,10 @@ class Person:
 
     def __str__(self):
         """String representation of the Person object."""
-        return f"{self.name:<20} {self.sales_target:<15} {self.revenue_to_date:<20}"
+        return
+        f"{self.name:<20}"
+        f"{self.sales_target:<15} {self.revenue_to_date:<20}"
+
 
 class SalesLeaderboard:
     """
@@ -50,12 +53,17 @@ class SalesLeaderboard:
 
     def print_leaderboard(self):
         """Print the sales leaderboard."""
-        print(f"{'Name':<20} {'Sales Target':<15} {'Revenue to Date':<20} {'Pacing to Target':<20}")
+        print(
+            f"{'Name':<20} {'Sales Target':<15}"
+            f"{'Revenue to Date':<20} {'Pacing to Target':<20}")
         for person in self.persons:
             pacing = person.calculate_pacing()
             pacing_str = f"{pacing:.2%}"
             color_code = self.get_color_code(pacing)
-            print(f"{person.name:<20} {person.sales_target:<15} {person.revenue_to_date:<20} {color_code}{pacing_str:<20}{Style.RESET_ALL}")
+            print(
+                f"{person.name:<20} {person.sales_target:<15} "
+                f"{person.revenue_to_date:<20} "
+                f"{color_code}{pacing_str:<20}{Style.RESET_ALL}")
 
     def search_person(self, name):
         """
@@ -92,6 +100,7 @@ class SalesLeaderboard:
         else:
             return Fore.RED
 
+
 def fetch_data_from_sheet(sheet):
     """
     Fetch sales data from a Google Sheets document.
@@ -102,8 +111,8 @@ def fetch_data_from_sheet(sheet):
     Returns:
         list: List of Person objects representing salespersons.
     """
-    worksheet = sheet.sheet1  
-    data = worksheet.get_all_values()[1:]  
+    worksheet = sheet.sheet
+    data = worksheet.get_all_values()[1:]
     persons = []
     for row in data:
         name, sales_target, revenue_to_date = row
@@ -113,6 +122,7 @@ def fetch_data_from_sheet(sheet):
         persons.append(person)
     return persons
 
+
 def display_leaderboard():
     """Display the sales leaderboard."""
     persons_from_sheet = fetch_data_from_sheet(SHEET)
@@ -120,15 +130,36 @@ def display_leaderboard():
     leaderboard.rank_by_pacing()
     leaderboard.print_leaderboard()
 
+
 def add_employee():
     """Add a new employee to the sales data."""
-    name = input("Enter employee name: ")
-    sales_target = float(input("Enter sales target: "))
-    revenue_to_date = float(input("Enter revenue to date: "))
+    name = get_name
+    sales_target = get_float_input("Enter sales target: ")
+    revenue_to_date = get_float_input("Enter revenue to date: ")
     new_person = Person(name, sales_target, revenue_to_date)
     # Append the new person to the Google Sheet
-    SHEET.sheet1.append_row([new_person.name, new_person.sales_target, new_person.revenue_to_date])
+    SHEET.sheet1.append_row(
+        [new_person.name, new_person.sales_target, new_person.revenue_to_date]
+    )
     print("Employee added successfully.")
+
+def get_name():
+    while True:
+        name = input("Enter employee name: ").strip()
+        if name:
+            return name
+        print("Please enter a valid name")
+
+def get_float_input(input_text):
+    while True:
+        try:
+            value = float(input(input_text))
+            if value >= 0:
+                return value
+            else:
+                print("Please enter a positive number")
+        except ValueError:
+            print("Please enter a valid number")
 
 def main_menu():
     """Display the main menu and handle user inputs."""
@@ -146,6 +177,7 @@ def main_menu():
             break
         else:
             print("Invalid choice. Please enter a number between 1-3.")
+
 
 if __name__ == "__main__":
     main_menu()
