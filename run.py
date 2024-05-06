@@ -1,6 +1,5 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from colorama import Fore, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -34,10 +33,6 @@ class SalesLeaderboard:
         for person in self.persons:
             pacing = person.calculate_pacing()
             pacing_str = f"{pacing:.2%}"
-            if pacing >= 1:
-                pacing_str = Fore.GREEN + pacing_str + Style.RESET_ALL
-            else:
-                pacing_str = Fore.RED + pacing_str + Style.RESET_ALL
             print(f"{person.name:<20} {person.sales_target:<15} {person.revenue_to_date:<20} {pacing_str:<20}")
 
     def search_person(self, name):
