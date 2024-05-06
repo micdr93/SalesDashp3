@@ -8,12 +8,14 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+# Load credentials from creds.json file
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 
-
+# Authenticate using the credentials
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
+# Open the specified Google Sheets document
 SHEET = GSPREAD_CLIENT.open('sales_leaderboardp3')
 
 class Person:
@@ -41,7 +43,7 @@ class SalesLeaderboard:
                 pacing_str = Fore.GREEN + pacing_str + Style.RESET_ALL
             else:
                 pacing_str = Fore.RED + pacing_str + Style.RESET_ALL
-            print(f"{person} {pacing_str:<20}")
+            print(f"{person.name:<20} {person.sales_target:<15} {person.revenue_to_date:<20} {pacing_str:<20}")
 
     def search_person(self, name):
         for person in self.persons:
@@ -53,7 +55,8 @@ class SalesLeaderboard:
         self.persons.sort(key=lambda x: x.calculate_pacing(), reverse=True)
 
 def fetch_data_from_sheet(sheet):
-    data = sheet.get_all_values()[1:]  # Exclude header row
+    worksheet = sheet.sheet1  
+    data = worksheet.get_all_values()[1:]  
     persons = []
     for row in data:
         name, sales_target, revenue_to_date = row
@@ -64,17 +67,13 @@ def fetch_data_from_sheet(sheet):
     return persons
 
 def main():
-   
     persons_from_sheet = fetch_data_from_sheet(SHEET)
 
-    leaderboard = SalesLeaderboard()
-
+    leaderboard = SalesLeaderboard(persons_from_sheet)
     
     leaderboard.rank_by_pacing()
 
-
     leaderboard.print_leaderboard()
-
 
     search_name = input("\nEnter the name of the person you want to search for: ")
     person = leaderboard.search_person(search_name)
