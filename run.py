@@ -61,24 +61,36 @@ def fetch_data_from_sheet(sheet):
         persons.append(person)
     return persons
 
-def main():
+def display_leaderboard():
     persons_from_sheet = fetch_data_from_sheet(SHEET)
-
     leaderboard = SalesLeaderboard(persons_from_sheet)
-    
     leaderboard.rank_by_pacing()
-
     leaderboard.print_leaderboard()
 
-    search_name = input("\nEnter the name of the person you want to search for: ")
-    person = leaderboard.search_person(search_name)
-    if person:
-        print("\nPerson found:")
-        print(f"Name: {person.name}")
-        print(f"Sales Target: {person.sales_target}")
-        print(f"Revenue to Date: {person.revenue_to_date}")
-    else:
-        print("\nPerson not found.")
+def add_employee():
+    name = input("Enter employee name: ")
+    sales_target = float(input("Enter sales target: "))
+    revenue_to_date = float(input("Enter revenue to date: "))
+    new_person = Person(name, sales_target, revenue_to_date)
+    # Append the new person to the Google Sheet
+    SHEET.sheet1.append_row([new_person.name, new_person.sales_target, new_person.revenue_to_date])
+    print("Employee added successfully.")
+
+def main_menu():
+    while True:
+        print("\n1. Display Leaderboard")
+        print("2. Add Employee")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            display_leaderboard()
+        elif choice == "2":
+            add_employee()
+        elif choice == "3":
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1-3.")
 
 if __name__ == "__main__":
-    main()
+    main_menu()
