@@ -8,14 +8,9 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-# Load credentials from creds.json file
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-
-# Authenticate using the credentials
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-
-# Open the specified Google Sheets document
 SHEET = GSPREAD_CLIENT.open('sales_leaderboardp3')
 
 class Person:
