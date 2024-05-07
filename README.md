@@ -18,9 +18,10 @@ The Sales Dashboard provides a convenient interface for users to monitor the cur
 - Sales records encapsulate specific sale information, including the transaction amount and date. 
 - Targets records maintain the predefined sales objectives for individual employees.
 
+
 ## Flowchart
 
-- I made the flowchart made with [Lucid Chart](https://lucidchart.com/) to map out the program:
+- I made the flowchart made with [Lucid Chart](https://lucidchart.com/) to map it out:
 ![flowchart](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/Flowchart%20(1).png)
 
 ## Features: 
@@ -28,6 +29,7 @@ The Sales Dashboard provides a convenient interface for users to monitor the cur
 - View current sales performance of salespeople.
 - Add new employees with sales targets and current sales figures.
 - It uses the library colorama to give an indication of top performers.
+- It uses Google Sheets to store the data.
 
 ![run](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/run.png)
 
@@ -45,6 +47,10 @@ The Sales Dashboard provides a convenient interface for users to monitor the cur
 
 - Employee Added Succcessfully
 ![Employee Added Succcessfully](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/employee_added_successfully.png)
+
+- Google Sheets
+![Google Sheets](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/google_sheets_setup.png)
+
 
 
 
