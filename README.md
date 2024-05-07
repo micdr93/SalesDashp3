@@ -2,12 +2,6 @@
 
 The Sales Dashboard provides a convenient interface for users to monitor the current sales performance of salespeople. Additionally, it offers functionality to add new employees along with their respective sales targets and current sales figures.
 
-## Features: 
-
-- View current sales performance of salespeople.
-- Add new employees with sales targets and current sales figures.
-- It uses the library colorama to give an indication of top performers.
-
 ![Run Program](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/run.png)
 
 
@@ -29,6 +23,28 @@ The Sales Dashboard provides a convenient interface for users to monitor the cur
 - I made the flowchart made with [Lucid Chart](https://lucidchart.com/) to map out the program:
 ![flowchart](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/Flowchart%20(1).png)
 
+## Features: 
+
+- View current sales performance of salespeople.
+- Add new employees with sales targets and current sales figures.
+- It uses the library colorama to give an indication of top performers.
+
+![run](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/run.png)
+
+- Display Leaderboard
+![display leaderboard](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/display_leaderboard.png)
+
+- Enter Employee Name
+![enter employee name](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/enter_employee_name.png)
+
+- Enter Employee Sales Target
+![enter sales target](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/enter_sales_target.png)
+
+- Enter Employee Revenue to Date
+![Enter Employee Revenue to Date](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/enter_rev_to_date.png)
+
+- Employee Added Succcessfully
+![Employee Added Succcessfully](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/employee_added_successfully.png)
 
 
 
