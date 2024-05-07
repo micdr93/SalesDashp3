@@ -143,7 +143,7 @@ def add_employee():
     sales_target = get_float_input("Enter sales target: ")
     revenue_to_date = get_float_input("Enter revenue to date: ")
     new_person = Person(name, sales_target, revenue_to_date)
-    # Append the new person to the Google Sheet
+ 
     SHEET.sheet1.append_row(
         [new_person.name, new_person.sales_target, new_person.revenue_to_date]
     )
