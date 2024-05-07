@@ -1,6 +1,11 @@
 # Sales Dashboard #
 
-The Sales Dashboard project is a Python based application that displays sales data in a leaderboard format.
-It pulls data from Google Sheets, measures the pacing towards target for each salesperson.
-It also allows users to add an employee, a sales target and revenue brought in to date.
+The Sales Dashboard provides a convenient interface for users to monitor the current sales performance of salespeople. Additionally, it offers functionality to add new employees along with their respective sales targets and current sales figures.
+
+## Features: ##
+
+- View current sales performance of salespeople.
+- Add new employees with sales targets and current sales figures.
+
+
 
