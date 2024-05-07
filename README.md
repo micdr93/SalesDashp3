@@ -60,7 +60,7 @@ The employee has now been added successfully.
 - Employee Added Succcessfully
 ![Employee Added Succcessfully](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/employee_added_successfully.png)
 
-- Google Sheets
+- Google Sheets structure
 ![Google Sheets](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/google_sheets_setup.png)
 
 ### Languages, Libraries, Tools Used:
@@ -81,6 +81,9 @@ The employee has now been added successfully.
 
 ## Testing
 
+The program was tested using the [CI Python Linter](https://pep8ci.herokuapp.com/#) with no issues:
+
+![cilinter](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/clinter.png)
 
 
 
