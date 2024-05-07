@@ -9,7 +9,9 @@ The Sales Dashboard provides a convenient interface for users to monitor the cur
 - It uses the library colorama to give an indication of top performers.
 
 ![Run Program](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/run.png)
-| Story ID | User Story                                     | Description                                          |
+
+
+|  | ## User Stories                                   | Description                                          |
 |----------|------------------------------------------------|------------------------------------------------------|
 | 1        | As a user, I want to view sales performance   | Users can monitor the current sales performance of salespeople |
 | 2        | As a user, I want to add new employees         | Users can add new employees|
