@@ -65,13 +65,13 @@ The employee has now been added successfully.
 
 ### Languages, Frameworks, Libraries Used:
 
-- [Python] (https://www.python.org/)
+- [Python](https://www.python.org/)
 
 - [GitPod](https://gitpod.io/) was used for writing, editing, committing and pushing to Github.
 
 - [GitHub](https://github.com/)
 
-- [Colorama] (https://pypi.org/project/colorama/) was used to indicate the top sales performers. 
+- [Colorama](https://pypi.org/project/colorama/) was used to indicate the top sales performers. 
 
  - [CI Python Linter](https://pep8ci.herokuapp.com/#) was used to validate the code.
 
