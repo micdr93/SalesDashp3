@@ -83,7 +83,7 @@ The employee has now been added successfully.
 
 The program was tested using the [CI Python Linter](https://pep8ci.herokuapp.com/#) with no issues:
 
-![cilinter](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/clinter.png)
+![cilinter](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/cilinter.png)
 
 
 
