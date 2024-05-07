@@ -110,9 +110,9 @@ Further testing was then done on the spreadsheet to alter the data:
 
 ### Credits:
 
-## Idea: 
+## Concept: 
 
-The idea behind this program was from my own experience previously working in Tech Sales.
+The concept behind this program was from my own experience previously working in Tech Sales.
 
 ## Code
 
@@ -128,7 +128,7 @@ I utilised the following sources to build the program:
  ### Acknowledgments
  
 - As always special thanks to my mentor, Dan Hamilton, for his continued guidance and support.
-- Code Institute Tutors for their help along the way. 
+- Code Institute Tutors & Community for their help along the way. 
 
 
 
