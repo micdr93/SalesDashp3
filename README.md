@@ -6,6 +6,5 @@ The Sales Dashboard provides a convenient interface for users to monitor the cur
 
 - View current sales performance of salespeople.
 - Add new employees with sales targets and current sales figures.
-
-![run_program](/workspace/SalesDashp3/assets/readme_files/run_program.png)
+![Run Program](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/run_program.png)
 
