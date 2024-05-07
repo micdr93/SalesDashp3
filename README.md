@@ -2,6 +2,8 @@
 
 The Sales Dashboard provides a convenient interface for users to monitor the current sales performance of salespeople. Additionally, it offers functionality to add new employees along with their respective sales targets and current sales figures.
 
+The Live Program can be found [here](https://salesdashboardp3-20d8194b2f29.herokuapp.com/)
+
 ![Run Program](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/run.png)
 
 
@@ -116,11 +118,11 @@ The idea behind this program was from my own experience previously working in Te
 
 I utilised the following sources to build the program:
 
-[Stack Overflow](https://stackoverflow.com/) 
-[W3Schools](https://www.w3schools.com/)
-[Code Institute](https://codeinstitute.net/ie/) 
-[Colorama](https://pypi.org/project/colorama/)
-[Programiz](https://www.programiz.com/)
+- [Stack Overflow](https://stackoverflow.com/) 
+- [W3Schools](https://www.w3schools.com/)
+- [Code Institute](https://codeinstitute.net/ie/) 
+- [Colorama](https://pypi.org/project/colorama/)
+- [Programiz](https://www.programiz.com/)
 
 
  ### Acknowledgments
