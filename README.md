@@ -63,19 +63,23 @@ The employee has now been added successfully.
 - Google Sheets
 ![Google Sheets](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/google_sheets_setup.png)
 
-### Languages, Frameworks, Libraries Used:
+### Languages, Libraries, Tools Used:
 
-- [Python](https://www.python.org/)
+- [Python](https://www.python.org/) is the languge used to build the program
 
 - [GitPod](https://gitpod.io/) was used for writing, editing, committing and pushing to Github.
 
-- [GitHub](https://github.com/)
+- [GitHub](https://github.com/) hosts all relevent
 
 - [Colorama](https://pypi.org/project/colorama/) was used to indicate the top sales performers. 
 
  - [CI Python Linter](https://pep8ci.herokuapp.com/#) was used to validate the code.
 
  - [Heroku](https://id.heroku.com) the application was deployed on Heroku.
+
+ - [Lucid Chart](https://lucidchart.com/) was used to make the flowchart.
+
+## Testing
 
 
 
