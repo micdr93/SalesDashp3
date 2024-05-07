@@ -69,7 +69,7 @@ The employee has now been added successfully.
 
 - [GitPod](https://gitpod.io/) was used for writing, editing, committing and pushing to Github.
 
-- [GitHub](https://github.com/) hosts all relevent
+- [GitHub](https://github.com/) hosts all relevent data and assets.
 
 - [Colorama](https://pypi.org/project/colorama/) was used to indicate the top sales performers. 
 
@@ -99,6 +99,34 @@ I tested the program for errors when adding new employees:
 Further testing was then done on the spreadsheet to alter the data:
 
 ![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/leaderboard_test.png)
+
+## Deployment
+
+- The code was written, edited and pushed in [GitPod](https://gitpod.io/) 
+
+- The program was then deployed on [Heroku](https://id.heroku.com/)
+
+### Credits:
+
+## Idea: 
+
+The idea behind this program was from my own experience previously working in Tech Sales.
+
+## Code
+
+I utilised the following sources to build the program:
+
+[Stack Overflow](https://stackoverflow.com/) 
+[W3Schools](https://www.w3schools.com/)
+[Code Institute](https://codeinstitute.net/ie/) 
+[Colorama](https://pypi.org/project/colorama/)
+[Programiz](https://www.programiz.com/)
+
+
+ ### Acknowledgments
+ 
+- As always special thanks to my mentor, Dan Hamilton, for his continued guidance and support.
+- Code Institute Tutors for their help along the way. 
 
 
 
