@@ -102,19 +102,19 @@ Further testing was then done on the spreadsheet to alter the data:
 
 ![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/leaderboard_test.png)
 
-## Deployment
+### Deployment
 
 - The code was written, edited and pushed in [GitPod](https://gitpod.io/) 
 
 - The program was then deployed on [Heroku](https://id.heroku.com/)
 
-### Credits:
+## Credits:
 
-## Concept: 
+### Concept: 
 
 The concept behind this program was from my own experience previously working in Tech Sales.
 
-## Code
+### Code
 
 I utilised the following sources to build the program:
 
