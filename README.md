@@ -92,9 +92,9 @@ The program was tested using the [CI Python Linter](https://pep8ci.herokuapp.com
 
 I tested the program for errors when adding new employees:
 
-![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/manua_test_1.png)
+![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/manual_test_1.png)
 
-![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/manua_test_2.png)
+![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/manual_test_2.png)
 
 
 
