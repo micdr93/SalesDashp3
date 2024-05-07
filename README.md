@@ -96,7 +96,9 @@ I tested the program for errors when adding new employees:
 
 ![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/manual_test_2.png)
 
+Further testing was then done on the spreadsheet to alter the data:
 
+![manual testing](https://github.com/micdr93/SalesDashp3/blob/main/assets/readme_files/leaderboard_test.png)
 
 
 
