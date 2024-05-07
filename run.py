@@ -14,6 +14,13 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('sales_leaderboardp3')
 
 
+def welcome():
+    '''
+    A welcome message
+    '''
+    print('Sales Dashboard')
+
+
 class Person:
     """
     Represents a person with sales-related attributes.
@@ -35,9 +42,8 @@ class Person:
 
     def __str__(self):
         """String representation of the Person object."""
-        return
-        f"{self.name:<20}"
-        f"{self.sales_target:<15} {self.revenue_to_date:<20}"
+        return f"{self.name:<20}" \
+               f"{self.sales_target:<15} {self.revenue_to_date:<20}"
 
 
 class SalesLeaderboard:
@@ -143,12 +149,14 @@ def add_employee():
     )
     print("Employee added successfully.")
 
+
 def get_name():
     while True:
         name = input("Enter employee name: ").strip()
         if name:
             return name
         print("Please enter a valid name")
+
 
 def get_float_input(input_text):
     while True:
@@ -160,6 +168,7 @@ def get_float_input(input_text):
                 print("Please enter a positive number")
         except ValueError:
             print("Please enter a valid number")
+
 
 def main_menu():
     """Display the main menu and handle user inputs."""
@@ -180,4 +189,5 @@ def main_menu():
 
 
 if __name__ == "__main__":
+    welcome()
     main_menu()
