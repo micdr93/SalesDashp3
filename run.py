@@ -57,10 +57,16 @@ class SalesLeaderboard:
         self.team_summary()
         print("Name      Target    Rev       NewRev   Pace   NPace")
         for p in self.persons:
+            name_color = Fore.LIGHTBLUE_EX
+            revenue_color = Fore.LIGHTBLUE_EX
             pace_color = Fore.GREEN if p.pacing() >= 1 else Fore.RED
             np_color = Fore.GREEN if p.np_pacing() >= 1 else Fore.RED
-            print(f"{p.name:<10}{p.sales_target:<10}{p.revenue_to_date:<10}{p.new_revenue:<10}"
-                  f"{pace_color}{p.pacing():.0%}   {np_color}{p.np_pacing():.0%}{Style.RESET_ALL}")
+            print(f"{name_color}{p.name:<10}{Style.RESET_ALL}"
+                  f"{p.sales_target:<10}"
+                  f"{revenue_color}{p.revenue_to_date:<10}{Style.RESET_ALL}"
+                  f"{p.new_revenue:<10}"
+                  f"{pace_color}{p.pacing():.0%}{Style.RESET_ALL}   "
+                  f"{np_color}{p.np_pacing():.0%}{Style.RESET_ALL}")
 
 
 def fetch_data(sheet):
