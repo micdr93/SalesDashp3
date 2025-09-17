@@ -40,7 +40,7 @@ class SalesLeaderboard:
         self.persons = persons
 
     def print_leaderboard(self):
-        print(f"{'Name':<15}{'Target':<12}{'Revenue':<15}{'New Rev':<15}{'Pacing':<10}{'NP Pacing':<10}")
+        print(f"{'Name':<15}{'Target':<12}{'Revenue':<15}{'New Product':<15}{'Pacing':<10}{'NP Pacing':<10}")
         for p in self.persons:
             pacing = f"{p.calculate_pacing():.0%}"
             np_pacing = f"{p.calculate_new_revenue_pacing():.0%}"
