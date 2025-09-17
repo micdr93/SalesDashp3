@@ -19,19 +19,22 @@ def welcome():
 
 
 class Person:
-    def __init__(self, name, sales_target, revenue_to_date, new_deals, new_revenue):
+    def __init__(self, name, sales_target, revenue_to_date, new_deals=0, new_revenue=0):
         self.name = name
         self.sales_target = sales_target
         self.revenue_to_date = revenue_to_date
         self.new_deals = new_deals
         self.new_revenue = new_revenue
-        self.new_revenue_target = 10000
 
     def calculate_pacing(self):
-        return self.revenue_to_date / self.sales_target
+        return self.revenue_to_date / self.sales_target if self.sales_target else 0
 
     def calculate_new_revenue_pacing(self):
-        return self.new_revenue / self.new_revenue_target
+        return self.new_revenue / 10000  # target 10,000 EUR
+
+    def __str__(self):
+        return f"{self.name:<15}{self.sales_target:<12}{self.revenue_to_date:<15}" \
+               f"{self.new_deals:<12}{self.new_revenue:<15}"
 
 
 class SalesLeaderboard:
@@ -39,27 +42,16 @@ class SalesLeaderboard:
         self.persons = persons
 
     def print_leaderboard(self):
-        for person in self.persons:
-            pacing = person.calculate_pacing()
-            pacing_str = f"{pacing:.2%}"
-            color_code = Fore.GREEN if pacing >= 1 else Fore.RED
-            new_revenue_pacing = person.calculate_new_revenue_pacing()
-            new_revenue_str = f"{new_revenue_pacing:.2%}"
-            new_color = Fore.GREEN if new_revenue_pacing >= 1 else Fore.RED
-            print(f"Name: {person.name}")
-            print(f"Sales Target: {person.sales_target}")
-            print(f"Revenue to Date: {person.revenue_to_date}")
-            print(f"Pacing to Target: {color_code}{pacing_str}{Style.RESET_ALL}")
-            print(f"New Product Deals: {person.new_deals}")
-            print(f"New Product Revenue: {person.new_revenue}")
-            print(f"New Revenue Pacing: {new_color}{new_revenue_str}{Style.RESET_ALL}")
-            print("-" * 30)
-
-    def search_person(self, name):
-        for person in self.persons:
-            if name.lower() in person.name.lower():
-                return person
-        return None
+        print(f"{'Name':<15}{'Target':<12}{'Revenue':<15}"
+              f"{'Deals':<12}{'New Rev':<15}{'Pacing':<10}{'NP Pacing':<10}")
+        for p in self.persons:
+            pacing = f"{p.calculate_pacing():.0%}"
+            np_pacing = f"{p.calculate_new_revenue_pacing():.0%}"
+            pacing_color = Fore.GREEN if p.calculate_pacing() >= 1 else Fore.RED
+            np_color = Fore.GREEN if p.calculate_new_revenue_pacing() >= 1 else Fore.RED
+            print(f"{p.name:<15}{p.sales_target:<12}{p.revenue_to_date:<15}"
+                  f"{p.new_deals:<12}{p.new_revenue:<15}"
+                  f"{pacing_color}{pacing:<10}{np_color}{np_pacing:<10}{Style.RESET_ALL}")
 
     def rank_by_pacing(self):
         self.persons.sort(key=lambda x: x.calculate_pacing(), reverse=True)
@@ -70,78 +62,60 @@ def fetch_data_from_sheet(sheet):
     data = worksheet.get_all_values()[1:]
     persons = []
     for row in data:
+        while len(row) < 5:
+            row.append('0')
         name, sales_target, revenue_to_date, new_deals, new_revenue = row
-        sales_target = float(sales_target)
-        revenue_to_date = float(revenue_to_date)
-        new_deals = int(new_deals)
-        new_revenue = float(new_revenue)
+        sales_target = float(sales_target) if sales_target else 0
+        revenue_to_date = float(revenue_to_date) if revenue_to_date else 0
+        new_deals = int(new_deals) if new_deals else 0
+        new_revenue = float(new_revenue) if new_revenue else 0
         person = Person(name, sales_target, revenue_to_date, new_deals, new_revenue)
         persons.append(person)
     return persons
 
 
 def display_leaderboard():
-    persons_from_sheet = fetch_data_from_sheet(SHEET)
-    leaderboard = SalesLeaderboard(persons_from_sheet)
+    persons = fetch_data_from_sheet(SHEET)
+    leaderboard = SalesLeaderboard(persons)
     leaderboard.rank_by_pacing()
     leaderboard.print_leaderboard()
 
 
 def add_employee():
-    name = get_name()
+    name = input("Enter employee name: ").strip()
     sales_target = get_float_input("Enter sales target: ")
     revenue_to_date = get_float_input("Enter revenue to date: ")
     new_deals = get_int_input("Enter new product deals: ")
     new_revenue = get_float_input("Enter new product revenue: ")
-    new_person = Person(name, sales_target, revenue_to_date, new_deals, new_revenue)
-
-    SHEET.sheet1.append_row([
-        new_person.name,
-        new_person.sales_target,
-        new_person.revenue_to_date,
-        new_person.new_deals,
-        new_person.new_revenue
-    ])
+    SHEET.sheet1.append_row([name, sales_target, revenue_to_date, new_deals, new_revenue])
     print("Employee added successfully.")
 
 
-def get_name():
-    while True:
-        name = input("Enter employee name: ").strip()
-        if name:
-            return name
-        print("Please enter a valid name")
-
-
-def get_float_input(input_text):
+def get_float_input(prompt):
     while True:
         try:
-            value = float(input(input_text))
+            value = float(input(prompt))
             if value >= 0:
                 return value
-            else:
-                print("Please enter a positive number")
+            print("Enter a positive number")
         except ValueError:
-            print("Please enter a valid number")
+            print("Invalid input")
 
 
-def get_int_input(input_text):
+def get_int_input(prompt):
     while True:
         try:
-            value = int(input(input_text))
+            value = int(input(prompt))
             if value >= 0:
                 return value
-            else:
-                print("Please enter a positive integer")
+            print("Enter a positive integer")
         except ValueError:
-            print("Please enter a valid integer")
+            print("Invalid input")
 
 
 def main_menu():
     while True:
-        print("\n1. Display Leaderboard")
-        print("2. Add Employee")
-        print("3. Exit")
+        print("\n1. Display Leaderboard\n2. Add Employee\n3. Exit")
         choice = input("Enter your choice: ")
         if choice == "1":
             display_leaderboard()
@@ -151,7 +125,7 @@ def main_menu():
             print("Exiting program.")
             break
         else:
-            print("Invalid choice. Please enter a number between 1-3.")
+            print("Invalid choice")
 
 
 if __name__ == "__main__":
